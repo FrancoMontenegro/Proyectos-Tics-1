@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Jekyll v4.1.1">
+  <title>Dashboard - Huerto Inteligente</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+  <!-- Custom styles for this template -->
+  <link href="../static/css/carousel.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-success">
+    <a class="navbar-brand" href="{{ url_for('index') }}">Huerto Inteligente</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('index') }}">Inicio <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#artef">Artefacto</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Sobre Nosotros</a>
+        </li>
+      </ul>
+      <span class="nav-item">
+        <a class="nav-link" href="{{ url_for('index') }}">Salir</a>
+      </span>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <div class="sidebar-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">
+                <span data-feather="home"></span>
+                Dashboard <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#users">
+                <span data-feather="file"></span>
+                Usuarios
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#adduser">
+                <span data-feather="shopping-cart"></span>
+                Añadir usuario
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#reclamos">
+                <span data-feather="shopping-cart"></span>
+                Reclamos y sugerencias
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <div class="header">
+          <br>
+          <form action = "{{ url_for('admindash') }}" method = "POST">
+            <h2>Añadir Artefacto</h2>
+            <label for="validationTemp">Límites temperatura</label>
+            <div class="row">
+              <div class="col">
+                <input type="number" id="validationTemp" name="minTemp" class="form-control" placeholder="Mínimo" min="-40" max="125" required>
+              </div>
+              <div class="col">
+                <input type="number" name="maxTemp" class="form-control" placeholder="Máximo" min="-40" max="125" required>
+              </div>
+            </div>
+            <br>
+            <label for="validationLuz">Límites luminosidad</label>
+            <div class="row">
+              <div class="col">
+                <input type="number" id="validationLuz" name="minLuz" class="form-control" placeholder="Mínimo" min="0" max="100" required>
+              </div>
+              <div class="col">
+                <input type="number" name="maxLuz" class="form-control" placeholder="Máximo" min="0" max="100" required>
+              </div>
+            </div>
+            <br>
+            <label for="validationHgnd">Límites humedad de suelo</label>
+            <div class="row">
+              <div class="col">
+                <input type="number" id="validationHgnd" name="minHgnd" class="form-control" placeholder="Mínimo" min="0" max="1023" required>
+              </div>
+              <div class="col">
+                <input type="number" name="maxHgnd" class="form-control" placeholder="Máximo" min="0" max="1023" required>
+              </div>
+            </div>
+            <br>
+            <label for="validationHamb">Límites humedad ambiente</label>
+            <div class="row">
+              <div class="col">
+                <input type="number" id="validationHamb" name="minHamb" class="form-control" placeholder="Mínimo" min="0" max="100" required>
+              </div>
+              <div class="col">
+                <input type="number" name="maxHamb" class="form-control" placeholder="Máximo" min="0" max="100" required>
+              </div>
+            </div>
+            <br>
+            <h2>Añadir Usuario</h2>
+            <div class="form-row">
+              <div class="col-md-4 mb-3">
+                <label for="validationDefault01">Nombre</label>
+                <input type="text" name="nombre" class="form-control" id="validationDefault01" placeholder="Nombre Apellido" value="Nombre Apellido" required>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="validationDefault02">Rut</label>
+                <input type="number" name="rut" class="form-control" id="validationDefault02" placeholder="Rut" value="Rut" required>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="validationDefaultUsername">Correo</label>
+                <input type="email" name="email" id="validationDefaultUsername" class="form-control" placeholder="Correo electrónico" required autofocus>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label for="validationDefault03">Contraseña</label>
+                <input type="text" name="contrasena" class="form-control" id="validationDefault03" placeholder="Contraseña" value="Contraseña" required>
+              </div>
+            </div>
+            
+            <button class="btn btn-success" type="submit">Crear usuario</button>
+          </form>
+        </div>
+
+      </main>
+    </div>
+  </div>
+<!--   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="../static/assets/dist/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../static/assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+  <script src="../static/js/dashboard.js"></script> -->
+</body>
+<!-- D3.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<!-- Plotly.js -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js?_ga=2.34730721.1151238818.1607338864-1262515206.1607338864"></script>
